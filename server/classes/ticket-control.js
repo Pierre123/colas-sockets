@@ -15,7 +15,7 @@ class TicketControl {
         this.ultimo = 0;
         this.hoy = new Date().getDate();
         this.tickets = [];
-        this.ultimosCola = [];
+        this.ultimos4 = [];
         let data = require('../data/data.json');
         //console.log(data);
 
@@ -49,7 +49,7 @@ class TicketControl {
     }
 
     getUltimos4() {
-        return this.ultimosCola;
+        return this.ultimos4;
     }
     atenderTicket(escritorio) {
         if (this.tickets.length === 0) {
@@ -60,13 +60,13 @@ class TicketControl {
         this.tickets.shift();
 
         let atenderTicket = new Ticket(numeroTicket, escritorio);
-        this.ultimosCola.unshift(atenderTicket);
+        this.ultimos4.unshift(atenderTicket);
 
-        if (this.ultimosCola.length > 4) {
-            this.ultimosCola.splice(-1, 1); // borrar ultimo elemtno
+        if (this.ultimos4.length > 4) {
+            this.ultimos4.splice(-1, 1); // borrar ultimo elemtno
         }
 
-        console.log(this.ultimosCola);
+        console.log(this.ultimos4);
         this.grabarArchivo();
 
         return atenderTicket;
